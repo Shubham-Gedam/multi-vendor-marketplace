@@ -260,4 +260,4 @@ The application has been tested for:
 
 Full Stack Developer
 
-GitHub: YOUR_GITHUB_PROFILE_URL
+GitHub: [YOUR_GITHUB_PROFILE_URL](https://github.com/Shubham-Gedam/multi-vendor-marketplace)
