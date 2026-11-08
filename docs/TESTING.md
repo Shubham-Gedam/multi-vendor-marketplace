@@ -72,7 +72,6 @@ Verified functionality:
 ## 5. Webhook Testing
 
 | Event | Expected Result | Observed Result |
-|---|---|---|
 | payment.captured | Payment event processed | PROCESSED |
 | Duplicate event | Already processed event ignored | Implemented; separate duplicate-event test pending |
 | payment.failed | Payment marked FAILED | Implemented; test pending |

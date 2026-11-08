@@ -1,6 +1,5 @@
 import ProductModel from "../models/Product.model.js";
 import { uploadToS3, deleteFromS3 } from "../utils/s3Upload.js";
-import Product from "../models/Product.model.js";
 import {
   syncProductToElastic,
   deleteProductFromElastic,
@@ -78,7 +77,8 @@ export async function createProductController(req, res) {
 export async function getProductsController(req, res) {
   try {
     const {
-      search,
+      search: searchParam,
+      q,
       category,
       minPrice,
       maxPrice,
@@ -88,6 +88,8 @@ export async function getProductsController(req, res) {
       page = 1,
       limit = 10,
     } = req.query;
+
+    const search = String(searchParam ?? q ?? "").trim();
 
     const allowedSortFields = ["price", "createdAt", "name"];
 
@@ -159,7 +161,9 @@ export async function getProductsController(req, res) {
               {
                 multi_match: {
                   query: search,
-                  fields: ["name^3", "description", "brand"],
+                  type: "best_fields",
+                  fields: ["name^5", "brand^2", "description"],
+                  operator: "and",
                   fuzziness: "AUTO",
                 },
               },
